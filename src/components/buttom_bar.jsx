@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
- import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logo from "../assets/menu-icon-svg-9.jpg";
+
+import logo from "../assets/react.svg";
 import popupIcon from "../assets/Pinecast_Thumbnail.webp";
 import introVideo from "../assets/X2_Baloons.mp4";
 
@@ -14,7 +14,7 @@ const BottomBar = () => {
   
   
   return (
-    <div className="flex justify-center items-center overflow-hidden">
+    <div className="flex justify-center items-center bottom-bar">
       {/* Enlarged Bottom Bar */}
       <motion.div
         initial={{ height: 64 }}
@@ -22,9 +22,9 @@ const BottomBar = () => {
         transition={{ duration: 0.5 }}
         className={`${
           isMainModalOpen
-            ? "rounded-t-3xl bottom-0 "
+            ? "rounded-t-3xl bottom-0 bottom-bar"
             : "rounded-3xl bottom-4  p-2 sm:bottom-6 opacity-80"
-        } fixed w-full max-w-screen-md bg-black-800 text-white flex items-center justify-between sm:h-24 rounded-t-3xl mx-4 overflow-hidden bg-black `}
+        } fixed w-full max-w-screen-md bg-black-800 text-white flex items-center justify-between sm:h-24 rounded-t-3xl mx-4 bottom-bar bg-black `}
         onClick={toggleMainModal}
       >
         {/* Content (Title and Popup Icon) */}
@@ -45,8 +45,6 @@ const BottomBar = () => {
         {/* Logo */}
         <div className={` ${isMainModalOpen ? "hidden" : "block"}`}>
           <img src={logo} alt="Logo" className="h-8 w-8" />
-          
-          <FontAwesomeIcon icon="fa-solid fa-bars" />
         </div>
 
         {/* Project Details Content */}
@@ -70,7 +68,7 @@ const BottomBar = () => {
               {/* Project Details Content */}
               <div className="top-[-10]">
                 {/* Navbar */}
-                <nav className="bg-black-700 p-4 rounded-t-lg fixed h-24 w-full max-w-screen-md">
+                <nav className="bottom-bar p-4 rounded-t-2xl fixed h-24 w-full max-w-screen-md">
                   <div className="container mx-auto w-full">
                     <div className="flex items-center justify-between">
                       <div className="text-white font-bold text-xl p-4">
