@@ -36,7 +36,7 @@ const BottomBar = () => {
       {/* Enlarged Bottom Bar */}
       <motion.div
         initial={{ height: 64 }}
-        animate={{ height: isModalOpen ? "98vh" : 98 }}
+        animate={{ height: isModalOpen ? "90vh" : 98 }}
         transition={{ duration: 0.5 }}
         className={`${
           isModalOpen
