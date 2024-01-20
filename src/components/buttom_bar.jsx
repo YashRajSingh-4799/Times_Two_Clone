@@ -1,36 +1,54 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-import logo from "../assets/react.svg";
+import logo from "../assets/menu.png";
 import popupIcon from "../assets/Pinecast_Thumbnail.webp";
 import introVideo from "../assets/X2_Baloons.mp4";
 
+const projectsData = [
+    { id: 1, title: "Project 1", description: "Description 1" },
+    { id: 2, title: "Project 2", description: "Description 2" },
+    { id: 3, title: "Project 3", description: "Description 3" },
+    { id: 4, title: "Project 4", description: "Description 4" },
+    { id: 5, title: "Project 5", description: "Description 5" },
+    { id: 6, title: "Project 6", description: "Description 6" }
+
+
+];
+
 const BottomBar = () => {
   const [isMainModalOpen, setMainModalOpen] = useState(false);
-  
+  const [isProjectListModal, setProjectListModal] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  const toggleMainModal = () => setMainModalOpen(!isMainModalOpen);
+  const toggleMainModal = () => {
+    setMainModalOpen(!isMainModalOpen);
+    setModalOpen(!isModalOpen);
+  };
 
-  
-  
+  const toggleProjectListModal = () => {
+    setProjectListModal(!isProjectListModal);
+    setModalOpen(!isModalOpen);
+  };
+
   return (
     <div className="flex justify-center items-center bottom-bar">
       {/* Enlarged Bottom Bar */}
       <motion.div
         initial={{ height: 64 }}
-        animate={{ height: isMainModalOpen ? "98vh" : 98 }}
+        animate={{ height: isModalOpen ? "98vh" : 98 }}
         transition={{ duration: 0.5 }}
         className={`${
-          isMainModalOpen
+          isModalOpen
             ? "rounded-t-3xl bottom-0 bottom-bar"
             : "rounded-3xl bottom-4  p-2 sm:bottom-6 opacity-80"
         } fixed w-full max-w-screen-md bg-black-800 text-white flex items-center justify-between sm:h-24 rounded-t-3xl mx-4 bottom-bar bg-black `}
-        onClick={toggleMainModal}
       >
         {/* Content (Title and Popup Icon) */}
         <div
-          className={`flex items-center w-full ${
-            isMainModalOpen ? "hidden" : "block"
+          onClick={toggleMainModal}
+          className={`flex items-center w-[80%] ${
+            isModalOpen ? "hidden" : "block"
           }`}
         >
           <img
@@ -43,7 +61,10 @@ const BottomBar = () => {
         </div>
 
         {/* Logo */}
-        <div className={` ${isMainModalOpen ? "hidden" : "block"}`}>
+        <div
+          onClick={toggleProjectListModal}
+          className={`W-36  Z-10 ${isModalOpen ? "hidden" : "block"}`}
+        >
           <img src={logo} alt="Logo" className="h-8 w-8" />
         </div>
 
@@ -170,6 +191,67 @@ const BottomBar = () => {
                       Volkswagen, WeWork
                     </p>
                   </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {/* Project List Content */}
+
+        {isProjectListModal && (
+          <div className="absolute bottom-0 inset-0 flex flex-col ">
+            {/* Fixed Navbar */}
+            <motion.div
+              initial={{ scale: 0.5 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.5 }}
+              className="overflow-y-auto flex-1"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span
+                className="cursor-pointer z-10 absolute top-4 right-4 text-2xl"
+                onClick={toggleProjectListModal}
+              >
+                &times;
+              </span>
+
+              {/* Project Details Content */}
+              <div className="top-[-10]">
+                {/* Navbar */}
+                <nav className="bottom-bar p-4 rounded-t-2xl fixed h-24 w-full max-w-screen-md">
+                  <div className="container mx-auto w-full">
+                      <div className="flex text-white justify-center items-center w-full font-bold text-3xl p-4">
+                        TIMES TWO
+                    
+                    </div>
+                  </div>
+                </nav>
+
+                {/* Project Details */}
+                <div className="py-12"></div>
+                <div className="flex w-full">
+                  {/*Array List of Projects */}
+
+                  <div>
+                    {projectsData.map((project) => (
+                      <div
+                        key={project.id}
+                        className="flex p-2 justify-center items-center"
+                      >
+                        <img
+                          className="h-20 rounded-2xl mx-2 w-20"
+                          src={popupIcon}
+                          alt=""
+                        />
+                        <h2 className="px-6 text-xl">{project.title}</h2>
+                        <p className="px-12 text-lg text-gray-500">
+                          {project.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  
                 </div>
               </div>
             </motion.div>
